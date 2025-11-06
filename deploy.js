@@ -13,8 +13,11 @@ const deploy = async () => {
   const accounts = await web3.eth.getAccounts();
   console.log("first", accounts[0]);
 
-  await new web3.eth.Contract(JSON.parse(interface))
+  const result = await new web3.eth.Contract(JSON.parse(interface))
     .deploy({ data: bytecode, arguments: ["MuninnDev"] })
-    .send({ from: accounts[0], gas: "1000000" });
+    .send({ from: accounts[0], gas: "1000" });
+
+  console.log("accounts[0]", accounts[0]);
+  console.log("Contract deployed to", result.options.address);
 };
 deploy();
